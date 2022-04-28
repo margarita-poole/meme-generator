@@ -2,10 +2,10 @@ import Logo from '../assets/Logo.png'
 
 const Header = () => {
   return (
-    <nav className='nav'>
-      <img src={Logo} alt='logo' className=''/>
-      <span>React Course - Project 3</span>
-    </nav>
+    <header className='nav'>
+      <img src={Logo} alt='logo' className='navImg'/>
+      <span className='navTitle'>React Course - Project 3</span>
+    </header>
   )
 }
 
