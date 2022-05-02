@@ -48,16 +48,16 @@ body {
 }
 
 .formInput {
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
   border-radius: 5px;
-  border: 1px solid #D5D4D8;
+  border: 1px solid #d5d4d8;
   text-indent: 8px;
 }
 
 .memeButton {
   background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 2.5rem;
@@ -72,4 +72,11 @@ body {
   margin: auto;
   border: none;
   cursor: pointer;
+}
+
+.newMeme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 4rem 4rem 4rem;
 }
