@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className='nav'>
       <img src={Logo} alt='logo' className='navImg'/>
-      <span className='navTitle'>React Course - Project 3</span>
+      <span className='navTitle'>Try customizing a popular meme!</span>
     </header>
   )
 }
