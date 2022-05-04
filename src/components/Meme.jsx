@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import memeButtonImage from '../assets/memeButtonImage 🖼.png'
-import memeData from '../memeData'
 
 const Meme = () => {
   const [memeInfo, setMemeInfo] = useState({
@@ -8,18 +7,22 @@ const Meme = () => {
     bottomText: '',
     randomImage: 'http://i.imgflip.com/1bij.jpg',
   })
+  const [allMemes, setAllMemes] = useState([])
 
-  const [allMemeImages, setAllMemeImages] = useState({ memeData })
+  useEffect(() => {
+    fetch('https://api.imgflip.com/get_memes')
+      .then((res) => res.json())
+      .then((data) => setAllMemes(data.data.memes))
+  }, [])
 
   const randomizedNewImg = () => {
-    const memesArray = allMemeImages.memeData.data.memes
-    // console.log('memesArray', memesArray)
-    const randomNumber = Math.floor(Math.random() * memesArray.length)
-    // console.log('randomNumber', randomNumber)
+    const randomNumber = Math.floor(Math.random() * allMemes.length)
+    const url = allMemes[randomNumber].url
     setMemeInfo((prev) => {
       return {
-        ...prev,
-        randomImage: memesArray[randomNumber].url,
+        topText: '',
+        bottomText: '',
+        randomImage: url,
       }
     })
   }
@@ -34,14 +37,11 @@ const Meme = () => {
     })
   }
 
-  function handleSubmit(event) {
-    event.preventDefault()
-  }
-
   return (
     <main className='memeContainer'>
-      <form className='form' onSubmit={handleSubmit}>
+      <div className='form'>
         <input
+          id='topText'
           type='text'
           placeholder='Top text'
           className='formInput'
@@ -50,22 +50,22 @@ const Meme = () => {
           value={memeInfo.topText}
         />
         <input
+          id='bottomText'
           type='text'
           placeholder='Bottom text'
           className='formInput'
           name='bottomText'
           onChange={handleChange}
           value={memeInfo.bottomText}
-        ></input>
-      </form>
-      <button
-        type='submit'
-        className='memeButton'
-        onClick={randomizedNewImg}
-        onSubmit={handleSubmit}
-      >
-        <img src={memeButtonImage} alt='button' width='' height='' />
-      </button>
+        />
+        <button
+          type='submit'
+          className='getNewImageButton'
+          onClick={randomizedNewImg}
+        >
+          <img src={memeButtonImage} alt='button' className='buttonImage' />
+        </button>
+      </div>
       <div className='meme'>
         <img src={memeInfo.randomImage} alt='new meme' className='memeImage' />
         <h2 className='memeText top'>{memeInfo.topText}</h2>
